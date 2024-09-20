@@ -318,9 +318,9 @@ class LlmRunConfig:
         """
         parser = ConfigParser("Evaluate a large language model")
         parser.add_config(LlmRunConfig, **LlmQuantConfig.generate_flags())
-        config, parsed_args, unknown_args = parser.parse_known_args(args)
+        config, unknown_args, namespace, empty_list = parser.parse_known_args(args)
         assert isinstance(config, LlmRunConfig)
-        return config, parsed_args, unknown_args
+        return config, empty_list
 
     @staticmethod
     def dump_default(path: str = "__default__.yaml") -> None:

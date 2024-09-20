@@ -271,6 +271,6 @@ def run(  # noqa: C901
 
 
 if __name__ == "__main__":
-    config, _, unknown_args = LlmRunConfig.parse_args()
+    config, unknown_args = LlmRunConfig.parse_args()
     assert len(unknown_args) == 0, f"Unknown arguments: {unknown_args}"
     run(config)

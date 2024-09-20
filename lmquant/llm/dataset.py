@@ -148,6 +148,12 @@ class LlmCalibrationCache(CalibrationCache):
                     assert cached is None, f"kwargs_cache[{k}] should be None"
                 elif isinstance(v, torch.Tensor):
                     assert v.allclose(cached), f"kwargs_cache[{k}] should be the same as kwargs[{k}]"
+                elif isinstance(v, tuple):
+                    for vi, ci in zip(v, cached):
+                        if isinstance(vi, torch.Tensor):
+                            assert vi.allclose(ci), f"kwargs_cache[{k}] should be the same as kwargs[{k}]"
+                        else:
+                            assert v == cached, f"kwargs_cache[{k}] should be the same as kwargs[{k}]"
                 else:
                     assert v == cached, f"kwargs_cache[{k}] should be the same as kwargs[{k}]"
         else:
